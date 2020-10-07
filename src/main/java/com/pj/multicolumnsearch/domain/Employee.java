@@ -39,7 +39,7 @@ public class Employee extends AbstractAuditingEntity implements Serializable
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
 
 	@Column(name = "phone")
