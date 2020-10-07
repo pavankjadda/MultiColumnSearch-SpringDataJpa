@@ -4,17 +4,16 @@ import com.pj.multicolumnsearch.domain.EmployeeProjectView;
 import com.pj.multicolumnsearch.dto.EmployeeRequestDTO;
 import com.pj.multicolumnsearch.repository.EmployeeProjectViewRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.NumberUtils;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Pavan Jadda
@@ -38,6 +37,42 @@ public class EmployeeServiceImpl implements EmployeeService
 				Sort.by(isNotNullOrEmpty(employeeRequestDTO.getSortDirection()) ? Sort.Direction.fromString(employeeRequestDTO.getSortDirection()) : Sort.Direction.DESC, employeeRequestDTO.getSortColumnName())));
 	}
 
+	@Override
+	public Page<EmployeeProjectView> findEmployeeProjectsExampleMatcher(EmployeeRequestDTO employeeRequestDTO)
+	{
+		/* Build Search object */
+		EmployeeProjectView employeeProjectView=new EmployeeProjectView();
+		employeeProjectView.setEmployeeId(employeeRequestDTO.getEmployeeId());
+		employeeProjectView.setLastName(employeeRequestDTO.getFilterText());
+		employeeProjectView.setFirstName(employeeRequestDTO.getFilterText());
+		try
+		{
+			employeeProjectView.setProjectId(Long.valueOf(employeeRequestDTO.getFilterText()));
+			employeeProjectView.setProjectBudget(Double.valueOf(employeeRequestDTO.getFilterText()));
+		}
+		catch (Exception e)
+		{
+			log.debug("Supplied filter text is not a Number");
+		}
+		employeeProjectView.setProjectName(employeeRequestDTO.getFilterText());
+		employeeProjectView.setProjectLocation(employeeRequestDTO.getFilterText());
+
+		/* Build Example and ExampleMatcher object */
+		ExampleMatcher customExampleMatcher = ExampleMatcher.matchingAny()
+				.withMatcher("firstName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+				.withMatcher("lastName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+				.withMatcher("projectId", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+				.withMatcher("projectName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+				.withMatcher("projectLocation", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+				.withMatcher("projectBudget", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase());
+
+		Example<EmployeeProjectView> employeeExample= Example.of(employeeProjectView, customExampleMatcher);
+
+		/* Get employees based on search criteria*/
+		return employeeProjectViewRepository.findAll(employeeExample, PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
+				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
+	}
+
 	/**
 	 * Builds and return specification object that filters data based on search string
 	 *
@@ -47,17 +82,6 @@ public class EmployeeServiceImpl implements EmployeeService
 	 */
 	private Specification<EmployeeProjectView> getSpecification(EmployeeRequestDTO employeeRequestDTO)
 	{
-		AtomicReference<String> finalSequenceNumber = new AtomicReference<>();
-		try
-		{
-			finalSequenceNumber.set(NumberUtils.parseNumber(employeeRequestDTO.getFilterText(),Integer.class ).toString());
-		}
-		catch (Exception e)
-		{
-			log.debug("Failed to convert Filter Text:{} to number. Search text is not a number", employeeRequestDTO.getFilterText());
-			finalSequenceNumber.set(null);
-		}
-
 		//Build Specification with Employee Id and Filter Text
 		return (root, criteriaQuery, criteriaBuilder) ->
 		{
