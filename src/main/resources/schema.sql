@@ -1,21 +1,4 @@
 
--- Create Employee Project View --
-drop view if exists employee_project_view;
-create view employee_project_view as
-select employee_id,
-       first_name,
-       last_name,
-       project_id,
-       name     as prject_name,
-       location as prject_location,
-       budget   as prject_budget
-from employee,
-     employee_project,
-     project
-where employee.id = employee_project.employee_id
-  and employee_project.project_id = project.id;
-
-
 
 -- Create Employee Table --
 create table employee
@@ -64,6 +47,25 @@ create table employee_project
             references project,
     primary key (employee_id, project_id)
 )
+
+
+-- Create Employee Project View --
+drop view if exists employee_project_view;
+
+create view employee_project_view as
+select employee_id,
+       first_name,
+       last_name,
+       project_id,
+       name     as prject_name,
+       location as prject_location,
+       budget   as prject_budget
+from employee,
+     employee_project,
+     project
+where employee.id = employee_project.employee_id
+  and employee_project.project_id = project.id;
+
 
 
 
