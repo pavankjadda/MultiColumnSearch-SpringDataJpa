@@ -1,3 +1,4 @@
+
 --  Employee insert
 SET IDENTITY_INSERT test.dbo.employee ON;
 INSERT INTO test.dbo.employee (id, first_name, last_name, email, address, phone) VALUES (1, N'John', N'Doe', null, null, null);
@@ -10,7 +11,9 @@ SET IDENTITY_INSERT test.dbo.employee OFF;
 
 --  Project insert
 SET IDENTITY_INSERT test.dbo.project ON;
-INSERT INTO test.dbo.project (id, name, budget, location, type) VALUES (1, N'HR Management System', 1000, N'DC', N'Internal');
+SET IDENTITY_INSERT test.dbo.project ON;
+INSERT INTO test.dbo.project (id, name, budget, location, type)VALUES (1, N'HR Management System', 1000, N'DC', N'Internal');
+SET IDENTITY_INSERT test.dbo.project OFF;
 SET IDENTITY_INSERT test.dbo.project ON;
 INSERT INTO test.dbo.project (id, name, budget, location, type)VALUES (2, N'Timesheet Managerment', 1000, N'NYC', N'Contract');
 SET IDENTITY_INSERT test.dbo.project ON;
@@ -18,7 +21,9 @@ INSERT INTO test.dbo.project (id, name, budget, location, type)VALUES (3, N'Onli
 SET IDENTITY_INSERT test.dbo.project ON;
 INSERT INTO test.dbo.project (id, name, budget, location, type)VALUES (4, N'Employee Portal', 1000, N'Chicago', N'Internal');
 SET IDENTITY_INSERT test.dbo.project ON;
+SET IDENTITY_INSERT test.dbo.project ON;
 INSERT INTO test.dbo.project (id, name, budget, location, type)VALUES (5, N'PayCheck System', 1000, N'Chicago', N'Internal');
+SET IDENTITY_INSERT test.dbo.project OFF;
 SET IDENTITY_INSERT test.dbo.project ON;
 INSERT INTO test.dbo.project (id, name, budget, location, type)VALUES (6, N'401K System', 1000, N'Chicago', N'Internal');
 SET IDENTITY_INSERT test.dbo.project OFF;

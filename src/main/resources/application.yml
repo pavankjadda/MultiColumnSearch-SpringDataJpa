@@ -9,11 +9,13 @@ spring:
     username: sa
     password: Test@2020
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    initialization-mode: never
+    data: classpath:data.sql
 
   jpa:
     hibernate:
       ddl-auto: none
-    generate-ddl: true
+
   h2:
     console:
       enabled: true
