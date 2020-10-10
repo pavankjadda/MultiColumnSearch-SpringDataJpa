@@ -76,7 +76,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	/**
 	 * Builds and return specification object that filters data based on search string
 	 *
-	 * @param employeeRequestDTO Employee Enrollments Request DTO object
+	 * @param employeeRequestDTO Employee Projects Request DTO object
 	 *
 	 * @return Specification with Employee Id and Filter Text
 	 */
@@ -91,7 +91,7 @@ public class EmployeeServiceImpl implements EmployeeService
 
 			if (isNotNullOrEmpty(employeeRequestDTO.getFilterText()))
 			{
-				//Predicate for Employee Enrollments data
+				//Predicate for Employee Projects data
 				Predicate predicateForData = criteriaBuilder.or(
 						criteriaBuilder.like(root.get("firstName"), "%" + employeeRequestDTO.getFilterText() + "%"),
 						criteriaBuilder.like(root.get("lastName"), "%" + employeeRequestDTO.getFilterText() + "%"),
