@@ -1,14 +1,14 @@
 
 spring:
-#  datasource:
-#    url: jdbc:h2:mem:db
-#    username: admin
-#    password: admin
   datasource:
-    url: jdbc:sqlserver://localhost;databaseName=test
-    username: sa
-    password: Test@2020
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:h2:mem:db
+    username: admin
+    password: admin
+#  datasource:
+#    url: jdbc:sqlserver://localhost;databaseName=test
+#    username: sa
+#    password: Test@2020
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
     hibernate:

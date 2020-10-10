@@ -2,19 +2,18 @@
 -- Create Employee Table --
 create table employee
 (
-    id bigint identity
-        primary key,
+    id bigint  primary key,
     created_by varchar(100),
     created_date datetime2,
     last_modified_by varchar(100),
     last_modified_date datetime2,
     address varchar(255),
-    email varchar(255) not null,
+    email varchar(255) ,
     first_name varchar(255) not null,
     last_name varchar(255) not null,
     phone varchar(255)
 )
-go
+
 
 
 -- Create Project Table --
@@ -31,19 +30,19 @@ create table project
     name varchar(255) not null,
     type varchar(255)
 )
-go
+
 
 create table employee_project
 (
     employee_id bigint not null
-        constraint FKb25s5hgggo6k4au4sye7teb3a
+        constraint FKb25s5hgg6k4au4sye7teb3a
             references employee,
     project_id bigint not null
         constraint FK4yddvnm7283a40plkcti66wv9
             references project,
     primary key (employee_id, project_id)
 )
-go
+
 
 
 -- Create Employee Project View --
