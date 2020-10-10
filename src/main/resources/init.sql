@@ -56,9 +56,9 @@ select employee_id,
        first_name,
        last_name,
        project_id,
-       name     as prject_name,
-       location as prject_location,
-       budget   as prject_budget
+       name     as project_name,
+       location as project_location,
+       budget   as project_budget
 from employee,
      employee_project,
      project
