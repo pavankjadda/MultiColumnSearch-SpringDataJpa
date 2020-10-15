@@ -24,6 +24,15 @@ public class EmployeeController
 	}
 
 	/*
+		Find paginated employee projects using Example Matcher
+	*/
+	@PostMapping("/find/projects/paginated/query")
+	public Page<EmployeeProjectView> findEmployeeProjectsByQuery(@RequestBody EmployeeRequestDTO employeeRequestDTO)
+	{
+		return employeeService.findEmployeeProjectsByQuery(employeeRequestDTO);
+	}
+
+	/*
 		Find paginated employee projects
 	*/
 	@PostMapping("/find/projects/paginated/specification")
@@ -40,4 +49,6 @@ public class EmployeeController
 	{
 		return employeeService.findEmployeeProjectsExampleMatcher(employeeRequestDTO);
 	}
+
+
 }

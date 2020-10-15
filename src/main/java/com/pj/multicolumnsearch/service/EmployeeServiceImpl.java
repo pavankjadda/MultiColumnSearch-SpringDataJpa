@@ -73,6 +73,13 @@ public class EmployeeServiceImpl implements EmployeeService
 				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
 	}
 
+	@Override
+	public Page<EmployeeProjectView> findEmployeeProjectsByQuery(EmployeeRequestDTO employeeRequestDTO)
+	{
+		return employeeProjectViewRepository.findAllByInputString(employeeRequestDTO.getFilterText(),PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
+				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
+	}
+
 	/**
 	 * Builds and return specification object that filters data based on search string
 	 *
