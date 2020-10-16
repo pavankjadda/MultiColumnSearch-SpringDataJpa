@@ -48,7 +48,7 @@ create table employee_project
 
 drop view if exists employee_project_view;
 create view employee_project_view as
-select employee_id,
+select distinct employee_id,
        first_name,
        last_name,
        project_id,
