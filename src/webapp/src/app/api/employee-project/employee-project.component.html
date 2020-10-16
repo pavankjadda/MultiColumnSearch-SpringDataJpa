@@ -1,0 +1,114 @@
+
+<!-- Paged Employee Projects Block -->
+<div >
+  <div class="card border-secondary col-12" style="margin:0; padding:0">
+    <div class="card-body">
+      <div style="margin-top: 30px">
+        <!-- Employee Projects table-->
+        <mat-grid-list cols="1">
+          <div style="margin-top: 20px">
+            <div class="mat-table-container mat-elevation-z8">
+              <div class="row col-12">
+                <mat-form-field class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 " style="margin-left: auto; margin-right: auto;margin-top: 20px">
+                  <input matInput [formControl]="filterTextInput" placeholder="Search for projects" aria-label="Search for projects" >
+                </mat-form-field>
+              </div>
+
+              <!-- Mat Spinner-->
+              <div class="loading-shade" *ngIf="loading" >
+                <mat-spinner  *ngIf="loading"></mat-spinner>
+              </div>
+
+              <table [dataSource]="employeeProjects" mat-table matSort
+                     matSortActive="registrationDate" matSortDirection="desc" matSortDisableClear="true">
+                <caption style="display:none">Employee Projects</caption>
+                <!-- Full Name Column -->
+                <ng-container matColumnDef="fullName">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell
+                      mat-sort-header
+                      scope="col">
+                    Full Name
+                  </th>
+                  <td *matCellDef="let element" mat-cell style="text-align: left"><a
+                    [routerLink]="['/person',element.personId]">
+                    {{element.fullName}} </a></td>
+                </ng-container>
+
+                <!-- MRN Column -->
+                <ng-container matColumnDef="mrn">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    MRN
+                  </th>
+                  <td *matCellDef="let element" mat-cell> {{element.mrn}} </td>
+                </ng-container>
+
+                <!-- Registration Date Column -->
+                <ng-container matColumnDef="registrationDate">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    Registration Date
+                  </th>
+                  <td *matCellDef="let element"
+                      mat-cell> {{element.registrationDate| date:systemConfig.SYSTEM_DATE_FORMAT:systemConfig.SYSTEM_TIME_ZONE}} </td>
+                </ng-container>
+
+                <!-- Last Event Date Column -->
+                <ng-container matColumnDef="lastEventDate">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    Last Event Date
+                  </th>
+                  <td *matCellDef="let element"
+                      mat-cell> {{element.lastEventDate| date:systemConfig.SYSTEM_DATE_FORMAT:systemConfig.SYSTEM_TIME_ZONE}} </td>
+                </ng-container>
+
+                <!-- Last Event Type Column -->
+                <ng-container matColumnDef="latestEventType">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    Last Event Type
+                  </th>
+                  <td *matCellDef="let element" mat-cell> {{element.latestEventType}} </td>
+                </ng-container>
+
+                <!--  Sequence Number Column -->
+                <ng-container matColumnDef="sequenceNumber">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    Sequence Number
+                  </th>
+                  <td *matCellDef="let element" mat-cell style="text-align: center"> {{element.sequenceNumber}} </td>
+                </ng-container>
+
+                <!--  Organization Column -->
+                <ng-container matColumnDef="organization">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    Organization
+                  </th>
+                  <td *matCellDef="let element" mat-cell > {{element.organization}} </td>
+                </ng-container>
+
+                <!--  Actions Column -->
+                <ng-container matColumnDef="enrollmentId">
+                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                      scope="col">
+                    Actions
+                  </th>
+                  <td *matCellDef="let element" mat-cell><a
+                    [routerLink]="['/enrollment',element.enrollmentId]">
+                    View </a></td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="employeeProjectColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: employeeProjectColumns;" mat-row></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[ 10, 20, 50, 100, 500 ]" [length]="this.totalElements" [pageSize]="this.pageSize" [pageIndex]="this.pageNumber" (page)="changePage($event)" showFirstLastButtons></mat-paginator>
+            </div>
+          </div>
+        </mat-grid-list>
+      </div>
+    </div>
+  </div>
+</div>

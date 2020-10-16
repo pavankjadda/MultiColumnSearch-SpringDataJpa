@@ -1,0 +1,67 @@
+.mat-table-container
+{
+  position: relative;
+  min-height: 200px;
+}
+table
+{
+  width: 100%;
+}
+
+th, td
+{
+  text-align: center;
+  padding: 10px;
+}
+
+.mat-sort-header-sorted
+{
+  color: black;
+}
+
+.mat-table
+{
+  width: 100%;
+}
+
+.mat-cell
+{
+  text-align: left;
+  padding-left: 10px;
+}
+
+
+.protocolEnrollmentsInputFilter
+{
+  width: 100%;
+}
+
+.col
+{
+  width: auto;
+  vertical-align: top;
+  padding: 10px;
+}
+
+
+.custom-table-header
+{
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  text-align: center;
+}
+
+.loading-shade
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
