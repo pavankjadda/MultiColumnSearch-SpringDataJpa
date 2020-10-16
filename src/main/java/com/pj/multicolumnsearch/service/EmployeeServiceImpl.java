@@ -73,10 +73,17 @@ public class EmployeeServiceImpl implements EmployeeService
 				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
 	}
 
+	@Override
+	public Page<EmployeeProjectView> findEmployeeProjectsByQuery(EmployeeRequestDTO employeeRequestDTO)
+	{
+		return employeeProjectViewRepository.findAllByInputString(employeeRequestDTO.getFilterText(),PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
+				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
+	}
+
 	/**
 	 * Builds and return specification object that filters data based on search string
 	 *
-	 * @param employeeRequestDTO Employee Enrollments Request DTO object
+	 * @param employeeRequestDTO Employee Projects Request DTO object
 	 *
 	 * @return Specification with Employee Id and Filter Text
 	 */
@@ -91,7 +98,7 @@ public class EmployeeServiceImpl implements EmployeeService
 
 			if (isNotNullOrEmpty(employeeRequestDTO.getFilterText()))
 			{
-				//Predicate for Employee Enrollments data
+				//Predicate for Employee Projects data
 				Predicate predicateForData = criteriaBuilder.or(
 						criteriaBuilder.like(root.get("firstName"), "%" + employeeRequestDTO.getFilterText() + "%"),
 						criteriaBuilder.like(root.get("lastName"), "%" + employeeRequestDTO.getFilterText() + "%"),

@@ -1,25 +1,15 @@
 
 spring:
   datasource:
-    url: jdbc:h2:mem:db
-    username: admin
-    password: admin
-    initialization-mode: always
-    data: classpath:data.sql
-    schema: classpath:schema.sql
-#  datasource:
-#    url: jdbc:sqlserver://localhost;databaseName=test
-#    username: sa
-#    password: Test@2020
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    initialization-mode: always
-#    data: classpath:data.sql
-#    schema: classpath:schema.sql
+    url: jdbc:mysql://localhost:33061/demodb?serverTimezone=UTC
+    username: root
+    password: test1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: none
-
+    generate-ddl: true
   h2:
     console:
       enabled: true

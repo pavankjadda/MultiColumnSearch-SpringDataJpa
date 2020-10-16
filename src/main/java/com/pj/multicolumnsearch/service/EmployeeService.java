@@ -12,4 +12,6 @@ public interface EmployeeService
 	Page<EmployeeProjectView> findEmployeeProjectsBySpecification(EmployeeRequestDTO employeeRequestDTO);
 
 	Page<EmployeeProjectView> findEmployeeProjectsExampleMatcher(EmployeeRequestDTO employeeRequestDTO);
+
+	Page<EmployeeProjectView> findEmployeeProjectsByQuery(EmployeeRequestDTO employeeRequestDTO);
 }
