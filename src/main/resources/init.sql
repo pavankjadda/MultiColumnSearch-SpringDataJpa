@@ -118,3 +118,5 @@ INSERT INTO employee_project (employee_id, project_id) VALUES (6, 3);
 INSERT INTO employee_project (employee_id, project_id) VALUES (6, 4);
 INSERT INTO employee_project (employee_id, project_id) VALUES (6, 5);
 INSERT INTO employee_project (employee_id, project_id) VALUES (6, 6);
+
+FLUSH PRIVILEGES;

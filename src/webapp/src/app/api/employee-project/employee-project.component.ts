@@ -27,7 +27,7 @@ export class EmployeeProjectComponent implements OnInit, AfterViewInit
   spinnerName = 'app-employee-project';
 
   //Variables
-  private employeeId: any;
+  employeeId=1;
   employeeProjects: EmployeeProject[];
   pageSize=20;
   pageNumber=0;
@@ -38,14 +38,13 @@ export class EmployeeProjectComponent implements OnInit, AfterViewInit
   filterTextInput=new FormControl();
 
   //Mat-Table
-  employeeProjectColumns: string[] = ['fullName', 'mrn', 'registrationDate', 'lastEventDate', 'latestEventType', 'sequenceNumber', 'organization', 'enrollmentId'];
+  employeeProjectColumns: string[] = ['employeeId','lastName', 'firstName', 'projectId', 'projectName', 'projectBudget', 'projectLocation'];
   employeeProjectMatTableDataSource = new MatTableDataSource<EmployeeProject>();
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
 
-  constructor(private employeeProjectService: EmployeeProjectService)
-  {
+  constructor(private employeeProjectService: EmployeeProjectService) {
   }
 
   ngOnInit(): void
@@ -67,7 +66,7 @@ export class EmployeeProjectComponent implements OnInit, AfterViewInit
         {
           let employeeProjectRequestDto=this.buildEmployeeProjectsRequestDtoObject();
           this.loading=true;
-          const url = environment.BASE_URL + EMPLOYEE_API_URL + '/find/projects/paginated/query';
+          const url = environment.BASE_URL + EMPLOYEE_API_URL + '/find/projects/paginated/specification';
           return this.employeeProjectService.getEmployeeProjects(url,employeeProjectRequestDto);
         }),
         map(data =>
@@ -94,7 +93,7 @@ export class EmployeeProjectComponent implements OnInit, AfterViewInit
     employeeProjectRequestDto.employeeId=Number(this.employeeId);
     employeeProjectRequestDto.currentPageNumber=this.pageNumber;
     employeeProjectRequestDto.pageSize=this.pageSize;
-    employeeProjectRequestDto.sortColumnName=this.sort.active==='fullName'?'lastName':this.sort.active;
+    employeeProjectRequestDto.sortColumnName=this.sort.active==='lastName'?'lastName':this.sort.active;
     employeeProjectRequestDto.sortDirection=this.sort.direction;
     employeeProjectRequestDto.filterText=this.filterTextInput.value??null;
     return employeeProjectRequestDto;
