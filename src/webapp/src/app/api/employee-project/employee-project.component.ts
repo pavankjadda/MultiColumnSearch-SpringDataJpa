@@ -66,7 +66,7 @@ export class EmployeeProjectComponent implements OnInit, AfterViewInit
         {
           let employeeProjectRequestDto=this.buildEmployeeProjectsRequestDtoObject();
           this.loading=true;
-          const url = environment.BASE_URL + EMPLOYEE_API_URL + '/find/projects/paginated/example_matcher';
+          const url = environment.BASE_URL + EMPLOYEE_API_URL + '/find/projects/paginated/query';
           return this.employeeProjectService.getEmployeeProjects(url,employeeProjectRequestDto);
         }),
         map(data =>

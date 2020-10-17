@@ -31,6 +31,13 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
+	public Page<EmployeeProjectView> findEmployeeProjectsByQuery(EmployeeRequestDTO employeeRequestDTO)
+	{
+		return employeeProjectViewRepository.findAllByInputString(employeeRequestDTO.getEmployeeId(), employeeRequestDTO.getFilterText(),PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
+				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
+	}
+
+	@Override
 	public Page<EmployeeProjectView> findEmployeeProjectsBySpecification(EmployeeRequestDTO employeeRequestDTO)
 	{
 		return employeeProjectViewRepository.findAll(getSpecification(employeeRequestDTO), PageRequest.of(employeeRequestDTO.getCurrentPageNumber(), employeeRequestDTO.getPageSize(),
@@ -70,13 +77,6 @@ public class EmployeeServiceImpl implements EmployeeService
 
 		/* Get employees based on search criteria*/
 		return employeeProjectViewRepository.findAll(employeeExample, PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
-				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
-	}
-
-	@Override
-	public Page<EmployeeProjectView> findEmployeeProjectsByQuery(EmployeeRequestDTO employeeRequestDTO)
-	{
-		return employeeProjectViewRepository.findAllByInputString(employeeRequestDTO.getFilterText(),PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
 				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
 	}
 
