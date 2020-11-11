@@ -1,4 +1,4 @@
-import {EmployeeProject} from "src/app/api/model/employee-project";
+import {EmployeeProject} from "src/app/model/employee-project";
 
 
 export interface Sort

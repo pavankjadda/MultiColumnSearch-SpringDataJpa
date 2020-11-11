@@ -1,7 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import {EmployeeProjectRequestDto} from "src/app/api/model/employee-project-request-dto";
-import {PaginatedEmployeeProject} from "src/app/api/model/paginated-employee-project";
+import {EmployeeProjectRequestDto} from "src/app/model/employee-project-request-dto";
+import {PaginatedEmployeeProject} from "src/app/model/paginated-employee-project";
 
 @Injectable({
   providedIn: 'root'

@@ -23,7 +23,7 @@ import {HomeComponent} from "./home/home.component";
 import {FooterComponent} from "./layout/footer/footer.component";
 import {HeaderComponent} from "./layout/header/header.component";
 import {MainComponent} from "./layout/main/main.component";
-import { EmployeeProjectComponent } from './api/employee-project/employee-project.component';
+import { EmployeeProjectComponent } from './employee-project/employee-project.component';
 
 @NgModule({
   declarations: [

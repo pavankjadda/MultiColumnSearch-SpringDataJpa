@@ -5,9 +5,9 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {merge} from "rxjs";
 import {catchError, map, startWith, switchMap} from "rxjs/operators";
-import {EmployeeProject} from "src/app/api/model/employee-project";
-import {EmployeeProjectRequestDto} from "src/app/api/model/employee-project-request-dto";
-import {EmployeeProjectService} from "src/app/api/service/employee-project.service";
+import {EmployeeProject} from "src/app/model/employee-project";
+import {EmployeeProjectRequestDto} from "src/app/model/employee-project-request-dto";
+import {EmployeeProjectService} from "src/app/service/employee-project.service";
 import {EMPLOYEE_API_URL, SystemConfig} from "src/app/constants/app.constants";
 import {environment} from "src/environments/environment";
 
