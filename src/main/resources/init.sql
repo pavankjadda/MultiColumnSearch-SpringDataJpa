@@ -48,7 +48,8 @@ create table employee_project
 
 drop view if exists employee_project_view;
 create view employee_project_view as
-select distinct employee_id,
+select distinct row_number() OVER (ORDER BY employee_id ) AS id,
+employee_id,
        first_name,
        last_name,
        project_id,

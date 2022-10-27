@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService
 	@Override
 	public Page<EmployeeProjectView> findEmployeeProjectsByQuery(EmployeeRequestDTO employeeRequestDTO)
 	{
-		return employeeProjectViewRepository.findAllByInputString(employeeRequestDTO.getEmployeeId(), employeeRequestDTO.getFilterText(),PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
+		return employeeProjectViewRepository.findAllByInputString( employeeRequestDTO.getFilterText(),PageRequest.of(employeeRequestDTO.getCurrentPageNumber(),
 				employeeRequestDTO.getPageSize(), Sort.by(employeeRequestDTO.getSortColumnName()).descending()));
 	}
 

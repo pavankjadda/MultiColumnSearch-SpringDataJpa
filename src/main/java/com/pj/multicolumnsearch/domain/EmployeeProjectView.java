@@ -21,6 +21,9 @@ public class EmployeeProjectView implements Serializable
 	private static final long serialVersionUID = 1916548443504880237L;
 
 	@Id
+	@Column(name = "id")
+	private Long id;
+
 	@Column(name = "employee_id")
 	private Long employeeId;
 
