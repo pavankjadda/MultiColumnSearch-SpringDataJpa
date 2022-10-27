@@ -1,10 +1,11 @@
-mysql:
-  image: mysql
-  ports:
-    - "33061:3306"
-  command: --init-file /data/application/init.sql
-  volumes:
-    - ./init.sql:/data/application/init.sql
-  environment:
-    MYSQL_ROOT_USER: root
-    MYSQL_ROOT_PASSWORD: Test@2020
+services:
+  mysql_db:
+    image: mysql
+    ports:
+      - "33061:3306"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: Test@2020
