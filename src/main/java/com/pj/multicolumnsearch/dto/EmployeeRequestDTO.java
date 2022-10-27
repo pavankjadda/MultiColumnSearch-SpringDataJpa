@@ -15,6 +15,6 @@ public class EmployeeRequestDTO {
     private String filterText;
 
     public String getFilterText() {
-        return filterText.isBlank() ? null : filterText;
+        return filterText == null || filterText.isBlank() ? null : filterText;
     }
 }
