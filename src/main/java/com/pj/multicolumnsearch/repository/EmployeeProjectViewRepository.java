@@ -12,12 +12,10 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface EmployeeProjectViewRepository extends JpaRepository<EmployeeProjectView, Long>, JpaSpecificationExecutor<EmployeeProjectView> {
     @Query(value = """
-SELECT e FROM EmployeeProjectView as e WHERE ((:inputString is null or e.lastName like %:inputString% ) OR (:inputString is null or e.firstName like %:inputString%))
-""")
+            SELECT e FROM EmployeeProjectView as e WHERE e.lastName like %:inputString%
+            OR e.firstName like %:inputString% OR (concat(e.projectId,'') like %:inputString%) OR
+            e.projectName like %:inputString% OR  (concat(e.projectBudget,'') like %:inputString%) OR
+            e.projectLocation like %:inputString%
+            """)
     Page<EmployeeProjectView> findAllByInputString(String inputString, Pageable pageable);
 }
-/*
-or (:inputString is null or concat(e.projectId,'') like %:inputString%) or
-			 (:inputString is null or e.projectName like %:inputString%) or  (:inputString is null or concat(e.projectBudget,'') like %:inputString%) or
-			 (:inputString is null or e.projectLocation like %:inputString%)
- */
