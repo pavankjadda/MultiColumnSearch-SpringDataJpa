@@ -47,7 +47,7 @@ create table employee_project
 
 
 drop view if exists employee_project_view;
-create view employee_project_view as
+create definer = root@`%` view employee_project_view as
 select distinct row_number() OVER (ORDER BY employee_id ) AS id,
 employee_id,
        first_name,
