@@ -1,103 +1,93 @@
-
-<!-- Paged Employee Projects Block -->
-<div >
-  <div class="card col-12" style="margin:0; padding:0">
-    <div class="card-body">
-      <div style="margin-top: 30px">
-        <!-- Employee Projects table-->
-        <mat-grid-list cols="1">
-          <div style="margin-top: 20px">
-            <div class="mat-table-container mat-elevation-z8">
-              <div class="row col-12">
-                <mat-form-field class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 " appearance="fill" style="margin-left: auto; margin-right: auto;margin-top: 20px">
-                  <input matInput [formControl]="filterTextInput"  placeholder="Search for projects" aria-label="Search for projects" >
-                </mat-form-field>
-              </div>
-
-              <!-- Mat Spinner-->
-              <div class="loading-shade" *ngIf="loading" >
-                <mat-spinner  *ngIf="loading"></mat-spinner>
-              </div>
-
-              <table [dataSource]="employeeProjects" mat-table matSort
-                     matSortActive="lastName" matSortDirection="desc" matSortDisableClear="true">
-                <caption style="display:none">Employee Projects</caption>
-                <!-- Employee Id Column -->
-                <ng-container matColumnDef="employeeId">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell
-                      mat-sort-header
-                      scope="col">
-                    Employee Id
-                  </th>
-                  <td *matCellDef="let element" mat-cell style="text-align: left">
-                    {{element.employeeId}}
-                  </td>
-                </ng-container>
-
-                <!-- Last Name Column -->
-                <ng-container matColumnDef="lastName">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
-                      scope="col">
-                    Last Name
-                  </th>
-                  <td *matCellDef="let element" mat-cell> {{element.lastName}} </td>
-                </ng-container>
-
-                <!-- First Name Column -->
-                <ng-container matColumnDef="firstName">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
-                      scope="col">
-                    First Name
-                  </th>
-                  <td *matCellDef="let element" mat-cell> {{element.firstName}} </td>
-                </ng-container>
-
-                <!-- Project Id Column -->
-                <ng-container matColumnDef="projectId">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell
-                      mat-sort-header
-                      scope="col">
-                    Project Id
-                  </th>
-                  <td *matCellDef="let element" mat-cell style="text-align: left">
-                    {{element.projectId}}
-                  </td>
-                </ng-container>
-
-                <!-- Project Name Column -->
-                <ng-container matColumnDef="projectName">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header scope="col">
-                    Project Name
-                  </th>
-                  <td *matCellDef="let element" mat-cell> {{element.projectName}} </td>
-                </ng-container>
-
-                <!-- Project Budget Column -->
-                <ng-container matColumnDef="projectBudget">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
-                      scope="col">
-                    Project Budget
-                  </th>
-                  <td *matCellDef="let element" mat-cell> ${{element.projectBudget}} </td>
-                </ng-container>
-
-                <!-- Project Location Column -->
-                <ng-container matColumnDef="projectLocation">
-                  <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
-                      scope="col">
-                    Project Location
-                  </th>
-                  <td *matCellDef="let element" mat-cell> {{element.projectLocation}} </td>
-                </ng-container>
-
-                <tr *matHeaderRowDef="employeeProjectColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: employeeProjectColumns;" mat-row></tr>
-              </table>
-              <mat-paginator [pageSizeOptions]="[ 10, 20, 50, 100, 500 ]" [length]="this.totalElements" [pageSize]="this.pageSize" [pageIndex]="this.pageNumber" (page)="changePage($event)" showFirstLastButtons></mat-paginator>
-            </div>
-          </div>
-        </mat-grid-list>
-      </div>
+<mat-card class="mat-elevation-z8">
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 "
+                        style="margin-left: auto; margin-right: auto;margin-top: 20px">
+            <input [formControl]="filterTextInput" aria-label="Search for projects" matInput
+                   placeholder="Search for projects">
+        </mat-form-field>
     </div>
-  </div>
-</div>
+
+    <!-- Mat Spinner-->
+    <div *ngIf="loading" class="loading-shade">
+        <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
+
+    <table [dataSource]="employeeProjects" mat-table matSort
+           matSortActive="lastName" matSortDirection="desc" matSortDisableClear="true">
+        <caption style="display:none">Employee Projects</caption>
+        <!-- Employee Id Column -->
+        <ng-container matColumnDef="employeeId">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell
+                mat-sort-header
+                scope="col">
+                Employee Id
+            </th>
+            <td *matCellDef="let element" mat-cell style="text-align: left">
+                {{element.employeeId}}
+            </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lastName">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                scope="col">
+                Last Name
+            </th>
+            <td *matCellDef="let element" mat-cell> {{element.lastName}} </td>
+        </ng-container>
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstName">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                scope="col">
+                First Name
+            </th>
+            <td *matCellDef="let element" mat-cell> {{element.firstName}} </td>
+        </ng-container>
+
+        <!-- Project Id Column -->
+        <ng-container matColumnDef="projectId">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell
+                mat-sort-header
+                scope="col">
+                Project Id
+            </th>
+            <td *matCellDef="let element" mat-cell style="text-align: left">
+                {{element.projectId}}
+            </td>
+        </ng-container>
+
+        <!-- Project Name Column -->
+        <ng-container matColumnDef="projectName">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                scope="col">
+                Project Name
+            </th>
+            <td *matCellDef="let element" mat-cell> {{element.projectName}} </td>
+        </ng-container>
+
+        <!-- Project Budget Column -->
+        <ng-container matColumnDef="projectBudget">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                scope="col">
+                Project Budget
+            </th>
+            <td *matCellDef="let element" mat-cell> ${{element.projectBudget}} </td>
+        </ng-container>
+
+        <!-- Project Location Column -->
+        <ng-container matColumnDef="projectLocation">
+            <th *matHeaderCellDef class="custom-table-header" mat-header-cell mat-sort-header
+                scope="col">
+                Project Location
+            </th>
+            <td *matCellDef="let element" mat-cell> {{element.projectLocation}} </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="employeeProjectColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: employeeProjectColumns;" mat-row></tr>
+    </table>
+    <mat-paginator (page)="changePage($event)" [length]="this.totalElements"
+                   [pageIndex]="this.pageNumber" [pageSizeOptions]="[ 10, 20, 50, 100, 500 ]"
+                   [pageSize]="this.pageSize" showFirstLastButtons></mat-paginator>
+</mat-card>
